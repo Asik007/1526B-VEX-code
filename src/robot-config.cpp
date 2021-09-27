@@ -15,7 +15,7 @@ motor_group LeftDriveSmart = motor_group(leftMotorA, leftMotorB);
 motor rightMotorA = motor(PORT3, ratio18_1, true);
 motor rightMotorB = motor(PORT4, ratio18_1, true);
 motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
-drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 398.98, 381, 381, mm, 0.35294117647058826);
+drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 381, 381, mm, 0.35294117647058826);
 motor ArmMotorA = motor(PORT5, ratio18_1, false);
 motor ArmMotorB = motor(PORT6, ratio18_1, true);
 motor_group Arm = motor_group(ArmMotorA, ArmMotorB);
@@ -30,6 +30,8 @@ encoder Back = encoder(Brain.ThreeWirePort.E);
 bool RemoteControlCodeEnabled = true;
 // define variables used for controlling motors based on controller inputs
 bool Controller1RightShoulderControlMotorsStopped = true;
+bool Controller1UpDownButtonsControlMotorsStopped = true;
+bool Controller1XBButtonsControlMotorsStopped = true;
 bool DrivetrainLNeedsToBeStopped_Controller1 = true;
 bool DrivetrainRNeedsToBeStopped_Controller1 = true;
 
@@ -93,6 +95,30 @@ int rc_auto_loop_function_Controller1() {
         Arm.stop();
         // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
         Controller1RightShoulderControlMotorsStopped = true;
+      }
+      // check the ButtonUp/ButtonDown status to control Claw
+      if (Controller1.ButtonUp.pressing()) {
+        Claw.spin(forward);
+        Controller1UpDownButtonsControlMotorsStopped = false;
+      } else if (Controller1.ButtonDown.pressing()) {
+        Claw.spin(reverse);
+        Controller1UpDownButtonsControlMotorsStopped = false;
+      } else if (!Controller1UpDownButtonsControlMotorsStopped) {
+        Claw.stop();
+        // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
+        Controller1UpDownButtonsControlMotorsStopped = true;
+      }
+      // check the ButtonX/ButtonB status to control Intake
+      if (Controller1.ButtonX.pressing()) {
+        Intake.spin(forward);
+        Controller1XBButtonsControlMotorsStopped = false;
+      } else if (Controller1.ButtonB.pressing()) {
+        Intake.spin(reverse);
+        Controller1XBButtonsControlMotorsStopped = false;
+      } else if (!Controller1XBButtonsControlMotorsStopped) {
+        Intake.stop();
+        // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
+        Controller1XBButtonsControlMotorsStopped = true;
       }
     }
     // wait before repeating the process
