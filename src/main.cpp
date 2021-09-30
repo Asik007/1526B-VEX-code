@@ -135,8 +135,16 @@ void pre_auton(void) {
 /*                                                                           */
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
+void auton_prog(void) {
+  for(int i = 0; i < 4; i++ ){
+  Drivetrain.driveFor(forward,6, inches);
+  Drivetrain.turn(right);
+}
+}
 
 void autonomous(void) {
+
+  auton_prog();
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
@@ -176,15 +184,18 @@ int main() {
   // Set up callbacks for autonomous and driver control periods.
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
-  Brain.Screen.print(odometry());
-
+  // Brain.Screen.print(odometry());
+  
   // Run the pre-autonomous function.
   pre_auton();
 
   // Prevent main from exiting with an infinite loop.
 
-  if (true) {
-    Brain.Screen.drawImageFromFile("pog.png",20,20);
-    
+  while (true) {
+    Brain.Screen.print(1);
+    if (Controller1.ButtonLeft.pressing()){
+      auton_prog();
+      Brain.Screen.print(3);
+  }
   }
 }
