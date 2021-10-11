@@ -3,10 +3,14 @@ using namespace vex;
 extern brain Brain;
 
 // VEXcode devices
-extern encoder LeftEncoder;
-extern encoder RightEncoder;
-extern encoder HorizontalEncoder;
-extern inertial InternalSensor;
+extern controller Controller1;
+extern drivetrain Drivetrain;
+extern motor_group Arm;
+extern motor Claw;
+extern motor Intake;
+extern encoder Left;
+extern encoder Right;
+extern encoder Back;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.

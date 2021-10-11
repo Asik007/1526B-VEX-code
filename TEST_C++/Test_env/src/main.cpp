@@ -82,10 +82,10 @@ void getDelta(void){
   std::fill_n(Delta, 4, 0);
   float Delt_L = Encod[0];
   float Delta_R = Encod[1];
-  Delta[0] = (Delt_L + Delta_R/2); // Center
-  Delta[3] = (Delt_L + Delta_R)/(2*cent_dist); //Theta
-  Delta[1] = Delta[0] * cos(Delta[3]/2);//X
-  Delta[2] = Delta[0] * sin(Delta[3]/2);//Y
+  Delta[0] = (Delt_L + Delta_R/2);
+  Delta[3] = (Delt_L + Delta_R)/(2*cent_dist);
+  Delta[1] = Delta[0] * cos(Delta[3]/2);
+  Delta[2] = Delta[0] * sin(Delta[3]/2);
 }
 
 void Odometry(void){
