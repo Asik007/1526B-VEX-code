@@ -11,7 +11,6 @@ brain  Brain;
 encoder EncoderA = encoder(Brain.ThreeWirePort.A);
 encoder EncoderB = encoder(Brain.ThreeWirePort.C);
 encoder EncoderC = encoder(Brain.ThreeWirePort.E);
-gyro Gyro = gyro(Brain.ThreeWirePort.G);
 controller Controller1 = controller(primary);
 motor leftMotorA = motor(PORT1, ratio18_1, false);
 motor leftMotorB = motor(PORT2, ratio18_1, false);

@@ -1,9 +1,8 @@
 #include "vex.h"
 
 using namespace vex;
-using signature = vision::signature;
-using code = vision::code;
 
+<<<<<<< HEAD
 // A global instance of brain used for printing to the V5 Brain screen
 brain  Brain;
 
@@ -126,12 +125,16 @@ int rc_auto_loop_function_Controller1() {
   }
   return 0;
 }
+=======
+// A global instance of brain used for printing to the V5 brain screen
+brain Brain;
+>>>>>>> parent of 5a9b800 (Finish Robot setup)
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
- * 
+ *
  * This should be called at the start of your int main function.
  */
-void vexcodeInit( void ) {
-  task rc_auto_loop_task_Controller1(rc_auto_loop_function_Controller1);
+void vexcodeInit(void) {
+  // Nothing to initialize
 }

@@ -12,16 +12,6 @@
 /*----------------------------------------------------------------------------*/
  
 // ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// Controller1          controller                    
-// Drivetrain           drivetrain    1, 2, 3, 4      
-// Arm                  motor_group   5, 6            
-// Claw                 motor         7               
-// Intake               motor         8               
-// Left                 encoder       A, B            
-// Right                encoder       C, D            
-// Back                 encoder       E, F            
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -32,7 +22,7 @@ using namespace vex;
 competition Competition;
 
 // define your global instances of motors and other devices here
-// also define your global variables here
+
 /*---------------------------------------------------------------------------*/
 /*                          Pre-Autonomous Functions                         */
 /*                                                                           */
@@ -55,6 +45,7 @@ int degrad(int pog){
   return rad;
 }
 
+<<<<<<< HEAD
 float distdeg(float dist_turn, float cent_radius){
   return (dist_turn/(radius*2*pi))/(pi/180);
 }
@@ -113,14 +104,11 @@ void coordinate(void){
   //function to convert distance to  coordinate system
 }
 
+=======
+>>>>>>> parent of 5a9b800 (Finish Robot setup)
 void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  Left.setPosition(0, degrees);
-  Right.setPosition(0, degrees);
-  Back.setPosition(0, degrees);
-
-
 
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
@@ -192,10 +180,14 @@ int main() {
   // Prevent main from exiting with an infinite loop.
 
   while (true) {
+<<<<<<< HEAD
     Brain.Screen.print(1);
     if (Controller1.ButtonLeft.pressing()){
       auton_prog();
       Brain.Screen.print(3);
   }
+=======
+    wait(100, msec);
+>>>>>>> parent of 5a9b800 (Finish Robot setup)
   }
 }

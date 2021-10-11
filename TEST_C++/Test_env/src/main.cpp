@@ -13,7 +13,6 @@
 // EncoderA             encoder       A, B            
 // EncoderB             encoder       C, D            
 // EncoderC             encoder       E, F            
-// Gyro                 gyro          G               
 // Controller1          controller                    
 // Drivetrain           drivetrain    1, 2, 3, 4, H   
 // ---- END VEXCODE CONFIGURED DEVICES ----
@@ -124,8 +123,11 @@ int main() {
       Brain.Screen.print(Encod[0]);
       Brain.Screen.newLine();
       track(1);
+      std::cout << "hello" << std::endl;
+      
       Brain.Screen.print(Encod[1]);
       Brain.Screen.newLine();
+
       track(2);
       Brain.Screen.print(Encod[2]);
       Brain.Screen.newLine();
