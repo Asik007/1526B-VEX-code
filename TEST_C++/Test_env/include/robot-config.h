@@ -6,9 +6,6 @@ extern brain Brain;
 extern encoder EncoderA;
 extern encoder EncoderB;
 extern encoder EncoderC;
-extern gyro Gyro;
-extern controller Controller1;
-extern smartdrive Drivetrain;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
