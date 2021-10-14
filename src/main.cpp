@@ -8,16 +8,6 @@
 /*----------------------------------------------------------------------------*/
 
 // ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// Controller1          controller                    
-// Drivetrain           drivetrain    1, 2, 3, 4      
-// Arm                  motor_group   5, 6            
-// Claw                 motor         7               
-// Intake               motor         8               
-// Left                 encoder       A, B            
-// Right                encoder       C, D            
-// Back                 encoder       E, F            
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -28,7 +18,7 @@ using namespace vex;
 competition Competition;
 
 // define your global instances of motors and other devices here
-// also define your global variables here
+
 /*---------------------------------------------------------------------------*/
 /*                          Pre-Autonomous Functions                         */
 /*                                                                           */
@@ -39,22 +29,9 @@ competition Competition;
 /*  not every time that the robot is disabled.                               */
 /*---------------------------------------------------------------------------*/
 
-void odometry(void){
-  //Has to be called every 10ms
-
-  
-
-  
-}
-
 void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  Left.setPosition(0, degrees);
-  Right.setPosition(0, degrees);
-  Back.setPosition(0, degrees);
-
-
 
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
@@ -116,8 +93,6 @@ int main() {
 
   // Prevent main from exiting with an infinite loop.
   while (true) {
-    wait(500, msec);
-    Brain.Screen.newLine();
-    Brain.Screen.print(Drivetrain.temperature(percent));
+    wait(100, msec);
   }
 }
