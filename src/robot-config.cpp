@@ -1,8 +1,9 @@
 #include "vex.h"
 
 using namespace vex;
+using signature = vision::signature;
+using code = vision::code;
 
-<<<<<<< HEAD
 // A global instance of brain used for printing to the V5 Brain screen
 brain  Brain;
 
@@ -15,22 +16,21 @@ motor rightMotorA = motor(PORT3, ratio18_1, false);
 motor rightMotorB = motor(PORT4, ratio18_1, false);
 motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
 drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 381, 381, mm, 0.35294117647058826);
-motor ArmMotorA = motor(PORT5, ratio18_1, false);
-motor ArmMotorB = motor(PORT6, ratio18_1, true);
-motor_group Arm = motor_group(ArmMotorA, ArmMotorB);
+motor LiftMotorA = motor(PORT5, ratio18_1, false);
+motor LiftMotorB = motor(PORT6, ratio18_1, true);
+motor_group Lift = motor_group(LiftMotorA, LiftMotorB);
 motor Claw = motor(PORT7, ratio18_1, false);
-motor Intake = motor(PORT8, ratio18_1, false);
 encoder Left = encoder(Brain.ThreeWirePort.A);
 encoder Right = encoder(Brain.ThreeWirePort.C);
-encoder Back = encoder(Brain.ThreeWirePort.E);
+motor Back_Lift = motor(PORT8, ratio18_1, false);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
 bool RemoteControlCodeEnabled = true;
 // define variables used for controlling motors based on controller inputs
+bool Controller1LeftShoulderControlMotorsStopped = true;
 bool Controller1RightShoulderControlMotorsStopped = true;
 bool Controller1UpDownButtonsControlMotorsStopped = true;
-bool Controller1XBButtonsControlMotorsStopped = true;
 bool DrivetrainLNeedsToBeStopped_Controller1 = true;
 bool DrivetrainRNeedsToBeStopped_Controller1 = true;
 
@@ -83,15 +83,27 @@ int rc_auto_loop_function_Controller1() {
         RightDriveSmart.setVelocity(drivetrainRightSideSpeed, percent);
         RightDriveSmart.spin(forward);
       }
-      // check the ButtonR1/ButtonR2 status to control Arm
+      // check the ButtonL1/ButtonL2 status to control Back_Lift
+      if (Controller1.ButtonL1.pressing()) {
+        Back_Lift.spin(forward);
+        Controller1LeftShoulderControlMotorsStopped = false;
+      } else if (Controller1.ButtonL2.pressing()) {
+        Back_Lift.spin(reverse);
+        Controller1LeftShoulderControlMotorsStopped = false;
+      } else if (!Controller1LeftShoulderControlMotorsStopped) {
+        Back_Lift.stop();
+        // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
+        Controller1LeftShoulderControlMotorsStopped = true;
+      }
+      // check the ButtonR1/ButtonR2 status to control Lift
       if (Controller1.ButtonR1.pressing()) {
-        Arm.spin(forward);
+        Lift.spin(forward);
         Controller1RightShoulderControlMotorsStopped = false;
       } else if (Controller1.ButtonR2.pressing()) {
-        Arm.spin(reverse);
+        Lift.spin(reverse);
         Controller1RightShoulderControlMotorsStopped = false;
       } else if (!Controller1RightShoulderControlMotorsStopped) {
-        Arm.stop();
+        Lift.stop();
         // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
         Controller1RightShoulderControlMotorsStopped = true;
       }
@@ -107,34 +119,18 @@ int rc_auto_loop_function_Controller1() {
         // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
         Controller1UpDownButtonsControlMotorsStopped = true;
       }
-      // check the ButtonX/ButtonB status to control Intake
-      if (Controller1.ButtonX.pressing()) {
-        Intake.spin(forward);
-        Controller1XBButtonsControlMotorsStopped = false;
-      } else if (Controller1.ButtonB.pressing()) {
-        Intake.spin(reverse);
-        Controller1XBButtonsControlMotorsStopped = false;
-      } else if (!Controller1XBButtonsControlMotorsStopped) {
-        Intake.stop();
-        // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
-        Controller1XBButtonsControlMotorsStopped = true;
-      }
     }
     // wait before repeating the process
     wait(20, msec);
   }
   return 0;
 }
-=======
-// A global instance of brain used for printing to the V5 brain screen
-brain Brain;
->>>>>>> parent of 5a9b800 (Finish Robot setup)
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
- *
+ * 
  * This should be called at the start of your int main function.
  */
-void vexcodeInit(void) {
-  // Nothing to initialize
+void vexcodeInit( void ) {
+  task rc_auto_loop_task_Controller1(rc_auto_loop_function_Controller1);
 }
