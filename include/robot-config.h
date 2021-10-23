@@ -10,6 +10,9 @@ extern motor Claw;
 extern encoder Left;
 extern encoder Right;
 extern motor Back_Lift;
+extern digital_out Sol1;
+extern digital_out Sol2;
+extern encoder Back;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.

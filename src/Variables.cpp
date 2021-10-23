@@ -1,4 +1,3 @@
-#pragma once
 
 //Position Coordinate initialization
 float Des_Pos[3][4] = {

@@ -23,6 +23,9 @@ motor Claw = motor(PORT7, ratio18_1, false);
 encoder Left = encoder(Brain.ThreeWirePort.A);
 encoder Right = encoder(Brain.ThreeWirePort.C);
 motor Back_Lift = motor(PORT8, ratio18_1, false);
+digital_out Sol1 = digital_out(Brain.ThreeWirePort.G);
+digital_out Sol2 = digital_out(Brain.ThreeWirePort.H);
+encoder Back = encoder(Brain.ThreeWirePort.E);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
@@ -30,7 +33,6 @@ bool RemoteControlCodeEnabled = true;
 // define variables used for controlling motors based on controller inputs
 bool Controller1LeftShoulderControlMotorsStopped = true;
 bool Controller1RightShoulderControlMotorsStopped = true;
-bool Controller1UpDownButtonsControlMotorsStopped = true;
 bool DrivetrainLNeedsToBeStopped_Controller1 = true;
 bool DrivetrainRNeedsToBeStopped_Controller1 = true;
 
@@ -106,18 +108,6 @@ int rc_auto_loop_function_Controller1() {
         Lift.stop();
         // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
         Controller1RightShoulderControlMotorsStopped = true;
-      }
-      // check the ButtonUp/ButtonDown status to control Claw
-      if (Controller1.ButtonUp.pressing()) {
-        Claw.spin(forward);
-        Controller1UpDownButtonsControlMotorsStopped = false;
-      } else if (Controller1.ButtonDown.pressing()) {
-        Claw.spin(reverse);
-        Controller1UpDownButtonsControlMotorsStopped = false;
-      } else if (!Controller1UpDownButtonsControlMotorsStopped) {
-        Claw.stop();
-        // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
-        Controller1UpDownButtonsControlMotorsStopped = true;
       }
     }
     // wait before repeating the process
