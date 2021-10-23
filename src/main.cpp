@@ -1,33 +1,6 @@
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// Controller1          controller                    
-// Drivetrain           drivetrain    1, 2, 3, 4      
-// Lift                 motor_group   5, 6            
-// Claw                 motor         7               
-// Left                 encoder       A, B            
-// Right                encoder       C, D            
-// Back_Lift            motor         8               
-// Sol1                 digital_out   G               
-// Sol2                 digital_out   H               
-// Back                 encoder       E, F            
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// Controller1          controller                    
-// Drivetrain           drivetrain    1, 2, 3, 4      
-// Lift                 motor_group   5, 6            
-// Claw                 motor         7               
-// Left                 encoder       A, B            
-// Right                encoder       C, D            
-// Back_Lift            motor         8               
-// Sol1                 digital_out   G               
-// Sol2                 digital_out   H               
-// Back                 encoder       E, F            
-// ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
+
 #include "Odometry.h"
 #include "Constants.h"
 #include "Variables.h"
@@ -80,7 +53,7 @@ void auton_prog(void) {
 void autonomous(void) {
 
   auton_prog();
-  Brain.Screen.print(pi);
+  // Brain.Screen.print(pi);
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
@@ -96,12 +69,23 @@ void autonomous(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 
+
+
 void usercontrol(void) {
   vexcodeInit();
   // User control code here, inside the loop
   while (1) {
-    if (Controller1.ButtonA.pressing()){Sol1.set(true);}else {Sol1.set(false);};
-    if (Controller1.ButtonB.pressing()){Sol1.set(true);}else {Sol1.set(false);};
+    if (Controller1.ButtonA.pressing()){
+      Sol1.set(true);}
+      else {Sol1.set(false);}
+    if (Controller1.ButtonB.pressing()){
+      Sol1.set(true); 
+      
+      
+      
+      
+      Controller1.rumble("-.-.-");  
+      }else {Sol1.set(false);};
 
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo
@@ -123,7 +107,7 @@ void usercontrol(void) {
 int main() {
   vexcodeInit();
   // Set up callbacks for autonomous and driver control periods.
-  odometry();
+  // odometry();
   
   // Run the pre-autonomous function.
   pre_auton();

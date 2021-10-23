@@ -9,7 +9,7 @@ float cent_dist = 7.5;
 ///////////////////////////////////////////////////////////////////
 //Position Coordinate initialization
 
-float Des_theta = {};
+float Des_theta;
 float Prev_Pos[4] = {};
 float Delta[4] = {}; 
 //1 = Center (not used any where)
