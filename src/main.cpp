@@ -11,8 +11,10 @@
 using namespace vex;
 
 
-
-// A global instance of competition
+void POG(void){
+  Brain.Screen.print("POG");
+};
+// A global instance of competitiondgdsf
 competition Competition;
 
 // define your global instances of motors and other devices here
