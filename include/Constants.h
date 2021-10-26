@@ -21,3 +21,6 @@
  extern int turnTotalError;
  extern bool resetDriveSensors;
  extern bool enableDrivePID;
+ extern float Rotdist;
+ extern float Rotrot;
+ 

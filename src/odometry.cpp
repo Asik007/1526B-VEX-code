@@ -9,15 +9,15 @@ using namespace vex;
 
 float degrad(int pog){return pog * (pi/180);}
 float raddeg(int pog){return pog * (180/pi);}
-float calc(int x, int y, int x1, int y1){
-  float dist = sqrt((x1-x)^2 + (y1-y)^2);
+void calc(float x, float y, float x1, float y1){
+  float dist = sqrt(((x1-x)*(x1-x)) + ((y1-y)*(y1-y)));
   float rot = atan((y1-y)/(x1-x));
   if(x<=x1 && y<=y1){rot = 90-raddeg(atan((y1-y)/(x1-x)));}
     else if(x<=x1 && y>=y1){rot = 180-raddeg(atan((y1-y)/(x1-x)));}
       else if(x>=x1 && y>=y1){rot = 270-raddeg(atan((y1-y)/(x1-x)));}
         else if(x>=x1 && y>=y1){rot = 360-raddeg(atan((y1-y)/(x1-x)));}
-  Drivetrain.turnFor(rot, rotationUnits::deg);
-  return dist;
+  Rotrot = rot;
+  Rotdist = dist;
 }
 
 

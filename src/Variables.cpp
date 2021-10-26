@@ -1,5 +1,7 @@
 
 //Position Coordinate initialization
+double DB = .7;
+double DB_turn = .5;
 float Des_Pos[3][4] = {
 {72,0,1,0},
 {20,0,2,0},
