@@ -7,15 +7,17 @@ using namespace vex;
 //multiuse functions
 
 
-float degrad(int pog){return pog * (pi/180);}
-float raddeg(int pog){return pog * (180/pi);}
+float degrad(float pog){return pog * (pi/180);}
+float raddeg(float pog){return pog * (180/pi);}
 float calc(int x, int y, int x1, int y1){
-  float dist = sqrt((x1-x)^2 + (y1-y)^2);
-  float rot = atan((y1-y)/(x1-x));
-  if(x<=x1 && y<=y1){rot = 90-raddeg(atan((y1-y)/(x1-x)));}
-    else if(x<=x1 && y>=y1){rot = 180-raddeg(atan((y1-y)/(x1-x)));}
-      else if(x>=x1 && y>=y1){rot = 270-raddeg(atan((y1-y)/(x1-x)));}
-        else if(x>=x1 && y>=y1){rot = 360-raddeg(atan((y1-y)/(x1-x)));}
+  float dist = sqrt((abs(x1-x))^2 + (abs(y1-y))^2);
+  float rot = raddeg(atan((y1-y)/(x1-x)));
+  Brain.Screen.print(rot);
+  if(x<=x1 && y>=y1 == true){rot = 180+raddeg(atan((y1-y)/(x1-x)));Brain.Screen.print("POG");}
+  if(x>=x1 && y>=y1 == true){rot = 270-raddeg(atan((y1-y)/(x1-x)));Brain.Screen.print("POG2");}
+  if(x>=x1 && y<=y1 == true){rot = 360+raddeg(atan((y1-y)/(x1-x)));Brain.Screen.print("POG3");}
+  if(x==x1 && y==y1 == true){rot = 0;}
+  Brain.Screen.print(rot);
   Drivetrain.turnFor(rot, rotationUnits::deg);
   return dist;
 }
@@ -38,6 +40,7 @@ void getDelta(void){
 }
 
 void odometry(void){
+  Brain.Screen.clearScreen();
   track();
   getDelta();
   for (int i = 0; i < 4; i++) {
@@ -49,21 +52,56 @@ void odometry(void){
 }
 
 void frt_lift(int POO){
-  if(POO == 1){
-    Claw.rotateFor(fwd, 90, degrees);
-    Lift.rotateFor(fwd, 180, degrees);
+  switch(POO){
+    case 1:
+      //TODO; write the solenoids into this
+      Brain.Screen.newLine();
+      Brain.Screen.print(POO);
+      Sol1.set(true);
+      wait(.05,seconds);
+      Brain.Screen.print("POGGER");
+      Lift.rotateFor(fwd, 180, degrees);
+      break;
+      
+    case 2:
+      Brain.Screen.newLine();
+      Brain.Screen.print(POO);
+      Sol1.set(false);
+      wait(.05,seconds);
+      Brain.Screen.print("POGGER");
+      Lift.rotateFor(reverse, 180, degrees);
+      break;
+
+    default:
+      Brain.Screen.newLine();
+      Brain.Screen.print(POO);    
+      break;
   }
-  else if (POO == 2) {
-  Lift.rotateFor(reverse, 170, degrees);
-  Claw.rotateFor(reverse,90, degrees);
-  }
+  
 }
 
 void bak_lift(int POO){
-  if(POO == 1){
-    Back_Lift.rotateFor(fwd, 90, degrees);
-  }
-  else if (POO == 2) {
-    Back_Lift.rotateFor(fwd, 90, degrees);
+  switch(POO){
+    case 1:
+      //TODO; write the solenoids into this
+      Brain.Screen.newLine();
+      Brain.Screen.print(POO);
+      Sol1.set(true);
+      wait(.05,seconds);
+      Brain.Screen.print("POGGER");
+      break;
+      
+    case 2:
+      Brain.Screen.newLine();
+      Brain.Screen.print(POO);
+      Sol1.set(false);
+      wait(.05,seconds);
+      Brain.Screen.print("POGGER");
+      break;
+
+    default:
+      Brain.Screen.newLine();
+      Brain.Screen.print(POO);    
+      break;
   }
 }

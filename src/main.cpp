@@ -7,7 +7,6 @@
 
 
 
-
 using namespace vex;
 
 
@@ -44,10 +43,27 @@ void pre_auton(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 void auton_prog(void) {
-  for(int i = 0; i < 4; i++ ){
-  Drivetrain.driveFor(forward,6, inches);
-  Drivetrain.turn(right);
-}
+  Brain.Screen.print(Des_Pos_len);
+  for(int i = 0; i < Des_Pos_len; i++ ){
+    Brain.Screen.clearScreen();
+    Brain.Screen.setCursor(1,1);
+    Brain.Screen.print(Des_Pos[i][0]);
+    Brain.Screen.print("_____");
+    Brain.Screen.print(Des_Pos[i][1]);
+    Brain.Screen.print("_____");
+    Brain.Screen.print(Pos[1]);
+    Brain.Screen.print("_____");
+    Brain.Screen.print(Pos[2]);
+    Brain.Screen.print("_____");
+    float forwd = calc(Pos[1],Pos[2],Des_Pos[i][0],Des_Pos[i][1]);
+    Brain.Screen.newLine();
+    Brain.Screen.print(forwd);
+    Drivetrain.driveFor(forward,forwd, inches);
+    frt_lift(Des_Pos[i][2]);
+    bak_lift(Des_Pos[i][3]);
+    Brain.Screen.print("DONE");
+    wait(5,seconds);
+  }
 }
 
 void autonomous(void) {
@@ -69,23 +85,55 @@ void autonomous(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 
+int POGGERS;
+bool Sol1state;
+bool Sol2state;
 
+void Sol1close(void){
+  Sol1.set(false);
+  Sol1state = false;
+  Controller1.Screen.setCursor(1,1);
+  Controller1.Screen.print("Sol1 closed"); 
+  }
+void Sol2close(void){
+  Sol2.set(false);
+  Sol2state = false;
+  Controller1.Screen.setCursor(2,0);
+  Controller1.Screen.print("Sol2 closed");
+  Controller1.Screen.print(POGGERS); 
+  }
 
 void usercontrol(void) {
   vexcodeInit();
   // User control code here, inside the loop
   while (1) {
+
+    Controller1.Screen.clearScreen();
+    Controller1.ButtonA.released(Sol1close);
+    Controller1.ButtonB.released(Sol2close);
     if (Controller1.ButtonA.pressing()){
-      Sol1.set(true);}
-      else {Sol1.set(false);}
-    if (Controller1.ButtonB.pressing()){
-      Sol1.set(true); 
+      // Controller1.Screen.clearScreen();
+      Controller1.Screen.setCursor(1,1);
+      Controller1.Screen.print("Sol1 open"); 
+      if(Sol2state == false){POGGERS++;Sol1state = true;}
+      Sol1.set(true);
+      Sol1state = true;
+      Controller1.Screen.print(POGGERS);
+      }
       
+    while (Controller1.ButtonB.pressing()){
+       
+      Controller1.Screen.setCursor(2,0);
+      Controller1.Screen.print("Sol2 open"); 
+      if(Sol2state == false){POGGERS++;Sol1state = true;}
+      Sol2state = true;
+      Sol2.set(true);
+      Controller1.Screen.print(POGGERS);// Controller1.rumble("-.-.-");  
+      }
+    if (Controller1.ButtonX.pressing() && Controller1.ButtonY.pressing() == true){
+      auton_prog();
+    }
       
-      
-      
-      Controller1.rumble("-.-.-");  
-      }else {Sol1.set(false);};
 
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo
@@ -106,6 +154,8 @@ void usercontrol(void) {
 //
 int main() {
   vexcodeInit();
+  Competition.autonomous(autonomous);
+  Competition.drivercontrol(usercontrol);
   // Set up callbacks for autonomous and driver control periods.
   // odometry();
   
@@ -115,11 +165,6 @@ int main() {
   // Prevent main from exiting with an infinite loop.
 
   while (true) {
-    Brain.Screen.print(1);
-    if (Controller1.ButtonLeft.pressing()){
-      auton_prog();
-      Brain.Screen.print(3);
-  }
     wait(100, msec);
   }
 }

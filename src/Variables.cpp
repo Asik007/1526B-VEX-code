@@ -1,10 +1,13 @@
 
 //Position Coordinate initialization
-float Des_Pos[3][4] = {
-{72,0,1,0},
-{20,0,2,0},
+float Des_Pos[5][4] = {
+{72,72,1,0},
+{-20,-20,2,0},
+{72,-72,1,0},
+{-20,20,2,0},
 {0,0,0,0},
 };
+int Des_Pos_len = sizeof Des_Pos / sizeof Des_Pos[0];
 //1 = x
 //2 =y
 //3 = frt_lift (0 nothing, 1 up, 2 down)
@@ -15,8 +18,8 @@ float Pos[4] = {0,0,0,0};
 //3 = Y
 //4 = Theta
 //ticks need to traverse 1 in
-int Left_tick = 1234;
-int Right_tick = 1234;
+int Left_tick = 753/20;
+int Right_tick = 753/20;
 
 //PID constants
 double KPID[3] = {1,2,3};
