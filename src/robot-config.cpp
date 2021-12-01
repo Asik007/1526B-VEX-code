@@ -1,5 +1,6 @@
 #include "vex.h"
 #include "Variables.h"
+
 using namespace vex;
 using signature = vision::signature;
 using code = vision::code;
@@ -12,8 +13,8 @@ controller Controller1 = controller(primary);
 motor leftMotorA = motor(PORT1, ratio18_1, true);
 motor leftMotorB = motor(PORT2, ratio18_1, true);
 motor_group LeftDriveSmart = motor_group(leftMotorA, leftMotorB);
-motor rightMotorA = motor(PORT4, ratio18_1, false);
-motor rightMotorB = motor(PORT9, ratio18_1, false);
+motor rightMotorA = motor(PORT3, ratio18_1, false);
+motor rightMotorB = motor(PORT4, ratio18_1, false);
 motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
 drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 381, 381, mm, 0.35294117647058826);
 motor LiftMotorA = motor(PORT5, ratio18_1, false);
@@ -42,10 +43,10 @@ int rc_auto_loop_function_Controller1() {
   while(true) {
     if(RemoteControlCodeEnabled) {
       // calculate the drivetrain motor velocities from the controller joystick axies
-      // left = Axis2 + Axis1
-      // right = Axis2 - Axis1
-      int drivetrainLeftSideSpeed = (driveSpeed*Controller1.Axis2.position()) + (driveTurn*Controller1.Axis1.position());
-      int drivetrainRightSideSpeed = (driveSpeed*Controller1.Axis2.position()) - (driveTurn*Controller1.Axis1.position());
+      // left = Axis3 + Axis4
+      // right = Axis3 - Axis4
+      int drivetrainLeftSideSpeed = (DB*Controller1.Axis3.position()) + (DB_turn*Controller1.Axis4.position());
+      int drivetrainRightSideSpeed = (DB*Controller1.Axis3.position()) - (DB_turn*Controller1.Axis4.position());
       
       // check if the values are inside of the deadband range
       if (abs(drivetrainLeftSideSpeed) < 5 && abs(drivetrainRightSideSpeed) < 5) {
