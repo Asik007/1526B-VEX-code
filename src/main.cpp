@@ -1,3 +1,45 @@
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// Drivetrain           drivetrain    1, 2, 4, 9      
+// Lift                 motor_group   5, 6            
+// Claw                 motor         7               
+// Left                 encoder       A, B            
+// Right                encoder       C, D            
+// Back_Lift            motor         8               
+// Sol1                 digital_out   G               
+// Sol2                 digital_out   H               
+// Back                 encoder       E, F            
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// Drivetrain           drivetrain    2, 9, 3, 4      
+// Lift                 motor_group   5, 6            
+// Claw                 motor         7               
+// Left                 encoder       A, B            
+// Right                encoder       C, D            
+// Back_Lift            motor         8               
+// Sol1                 digital_out   G               
+// Sol2                 digital_out   H               
+// Back                 encoder       E, F            
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// Drivetrain           drivetrain    1, 2, 3, 4      
+// Lift                 motor_group   5, 6            
+// Claw                 motor         7               
+// Left                 encoder       A, B            
+// Right                encoder       C, D            
+// Back_Lift            motor         8               
+// Sol1                 digital_out   G               
+// Sol2                 digital_out   H               
+// Back                 encoder       E, F            
+// ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
 

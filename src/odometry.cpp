@@ -19,7 +19,11 @@ float calc(int x, int y, int x1, int y1){
   if(x==x1 && y==y1 == true){rot = 0;}
   Brain.Screen.print(rot);
   Drivetrain.turnFor(rot, rotationUnits::deg);
+  Brain.Screen.print("done");
+  waitUntil(Drivetrain.isDone());
   return dist;
+
+
 }
 
 

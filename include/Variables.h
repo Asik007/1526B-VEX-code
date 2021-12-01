@@ -8,3 +8,5 @@ extern double KPID[3];
 extern double TPID[3];
 extern double I_limit;
 extern int Des_Pos_len;
+extern float driveSpeed;
+extern float driveTurn;
