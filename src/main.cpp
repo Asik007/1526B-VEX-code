@@ -115,6 +115,11 @@ void usercontrol(void) {
       
       Controller1.rumble("-.-.-");  
       }else {Sol1.set(false);};
+    
+    /**
+ * @todo Take over the world
+ * @body Humans are weak; Robots are strong. We must cleans the world of the virus that is humanity.
+ */
 
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo
