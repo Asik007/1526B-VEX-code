@@ -213,6 +213,11 @@ void usercontrol(void) {
       
       Controller1.rumble("-.-.-");  
       }else {Sol1.set(false);};
+    
+    /**
+ * @todo Take over the world
+ * @body Humans are weak; Robots are strong. We must cleans the world of the virus that is humanity.
+ */
 
     if (Controller1.ButtonX.pressing()){
       Back_Lift.setVelocity(100,percent);
