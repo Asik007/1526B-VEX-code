@@ -1,5 +1,4 @@
 #include "vex.h"
-#include "Variables.h"
 
 using namespace vex;
 using signature = vision::signature;
@@ -10,10 +9,10 @@ brain  Brain;
 
 // VEXcode device constructors
 controller Controller1 = controller(primary);
-motor leftMotorA = motor(PORT1, ratio18_1, true);
-motor leftMotorB = motor(PORT2, ratio18_1, true);
+motor leftMotorA = motor(PORT9, ratio18_1, true);
+motor leftMotorB = motor(PORT1, ratio18_1, true);
 motor_group LeftDriveSmart = motor_group(leftMotorA, leftMotorB);
-motor rightMotorA = motor(PORT3, ratio18_1, false);
+motor rightMotorA = motor(PORT2, ratio18_1, false);
 motor rightMotorB = motor(PORT4, ratio18_1, false);
 motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
 drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 381, 381, mm, 0.35294117647058826);
@@ -45,8 +44,8 @@ int rc_auto_loop_function_Controller1() {
       // calculate the drivetrain motor velocities from the controller joystick axies
       // left = Axis3 + Axis4
       // right = Axis3 - Axis4
-      int drivetrainLeftSideSpeed = (DB*Controller1.Axis3.position()) + (DB_turn*Controller1.Axis4.position());
-      int drivetrainRightSideSpeed = (DB*Controller1.Axis3.position()) - (DB_turn*Controller1.Axis4.position());
+      int drivetrainLeftSideSpeed = Controller1.Axis3.position() + Controller1.Axis4.position();
+      int drivetrainRightSideSpeed = Controller1.Axis3.position() - Controller1.Axis4.position();
       
       // check if the values are inside of the deadband range
       if (abs(drivetrainLeftSideSpeed) < 5 && abs(drivetrainRightSideSpeed) < 5) {
